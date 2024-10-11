@@ -1,9 +1,9 @@
 import 'package:crafty_bay/data/model/network_server_response.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/state_holders/cart_list_controller.dart';
-import 'package:crafty_bay/data/state_holders/create_cart_controller.dart';
 import 'package:crafty_bay/data/state_holders/token_controller.dart';
 import 'package:crafty_bay/data/state_holders/profile_state.dart';
+import 'package:crafty_bay/data/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/data/utils/server_urls.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +34,7 @@ class PinVerifyController extends GetxController {
       success = true;
       _profileExist = await ProfileState.checkProfileState();
       Get.find<CartListController>().getCarts();
+      Get.find<WishListController>().getWishList();
       _loading = false;
       _errorMessage = null;
     } else {

@@ -5,12 +5,12 @@ import 'package:crafty_bay/data/state_holders/profile_state.dart';
 import 'package:crafty_bay/data/utils/server_urls.dart';
 import 'package:get/get.dart';
 
-class CartDeleteController extends GetxController {
+class WishlistAdditionController extends GetxController {
   bool _loading = false;
 
   bool get loading => _loading;
 
-  Future<bool> deleteACart({required String productId}) async {
+  Future<bool> addToWishList({required String productId}) async {
     _loading = true;
     bool success;
     update();
@@ -18,7 +18,7 @@ class CartDeleteController extends GetxController {
     if (accessToken != null) {
       NetworkServerResponse networkServerResponse =
           await Get.find<NetworkCaller>().getResponse(
-              url: ServerURLSs.deleteCart(productId: productId),
+              url: ServerURLSs.addToWishList(productId: productId),
               token: accessToken);
       if (networkServerResponse.isSuccess &&
           networkServerResponse.responseBody["msg"].toString() == "success") {

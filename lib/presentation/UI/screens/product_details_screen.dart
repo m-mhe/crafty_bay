@@ -1,5 +1,6 @@
 import 'package:crafty_bay/data/model/add_to_cart.dart';
 import 'package:crafty_bay/data/state_holders/create_cart_controller.dart';
+import 'package:crafty_bay/data/state_holders/wishlist_addition_controller.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
 import 'package:crafty_bay/presentation/UI/screens/review_screen.dart';
 import 'package:crafty_bay/presentation/UI/widgets/bottom_popup_message.dart';
@@ -87,10 +88,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 controller.productDetailsData?.product?.title ??
                                     'Error'),
                             _reviewSection(
-                                context,
-                                controller.productDetailsData?.product?.star
+                                context: context,
+                                rating: controller
+                                        .productDetailsData?.product?.star
                                         .toString() ??
-                                    'Error'),
+                                    'Error',
+                                productId: controller
+                                        .productDetailsData?.productId
+                                        .toString() ??
+                                    '1'),
                             const SizedBox(
                               height: 15,
                             ),
@@ -142,35 +148,39 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
               ),
-              GetBuilder<CreateCartController>(
-                builder: (controller) {
-                  return Visibility(
-                    visible: !controller.loading,
-                    replacement: const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: ButtonLoadingIndicator(),
-                    ),
-                    child: TotalPriceAndProceed(
-                      totalPrice: int.parse(
-                          Get.find<ProductDetailsController>().productDetailsData?.product?.price ?? '0') *
-                          _itemBuyingAmount,
-                      buttonOnTap: () async{
-                        bool check = await controller.createCart(AddToCart(productId:widget.id,
-                            color:_color,
-                            size:_size,
-                            qty:_itemBuyingAmount));
-                        if(check){
-                          bottomPopUpMessage(context, 'Added to cart successfully!');
-                        }else{
-                          bottomPopUpMessage(context, 'Please login to your profile!');
-                          Get.to(()=>const EmailIdentificationScreen());
-                        }
-                      },
-                      buttonLabel: 'Add To Cart',
-                    ),
-                  );
-                }
-              )
+              GetBuilder<CreateCartController>(builder: (controller) {
+                return Visibility(
+                  visible: !controller.loading,
+                  replacement: const Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: ButtonLoadingIndicator(),
+                  ),
+                  child: TotalPriceAndProceed(
+                    totalPrice: int.parse(Get.find<ProductDetailsController>()
+                                .productDetailsData
+                                ?.product
+                                ?.price ??
+                            '0') *
+                        _itemBuyingAmount,
+                    buttonOnTap: () async {
+                      bool check = await controller.createCart(AddToCart(
+                          productId: widget.id,
+                          color: _color,
+                          size: _size,
+                          qty: _itemBuyingAmount));
+                      if (check) {
+                        bottomPopUpMessage(
+                            context, 'Added to cart successfully!');
+                      } else {
+                        bottomPopUpMessage(
+                            context, 'Please login to your profile!');
+                        Get.to(() => const EmailIdentificationScreen());
+                      }
+                    },
+                    buttonLabel: 'Add To Cart',
+                  ),
+                );
+              })
             ],
           ),
         );
@@ -178,7 +188,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _reviewSection(BuildContext context, String rating) {
+  Widget _reviewSection(
+      {required BuildContext context,
+      required String rating,
+      required String productId}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -212,18 +225,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         const SizedBox(
           width: 6,
         ),
-        Container(
-          height: 18,
-          width: 18,
-          decoration: BoxDecoration(
-            color: ThemeColor.accentColor,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: const Icon(
-            Icons.favorite_border_rounded,
-            color: Colors.white,
-            size: 13,
-          ),
+        InkWell(
+          onTap: () async {
+            bool added = await Get.find<WishlistAdditionController>()
+                .addToWishList(productId: productId);
+            if (added) {
+              bottomPopUpMessage(context, 'Added to the wishlist!');
+            } else {
+              bottomPopUpMessage(context, 'You have to Login');
+              Get.to(() => const EmailIdentificationScreen());
+            }
+          },
+          child: GetBuilder<WishlistAdditionController>(builder: (controller) {
+            return Visibility(
+              visible: !controller.loading,
+              replacement: const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(),
+              ),
+              child: Container(
+                height: 20,
+                width: 20,
+                decoration: BoxDecoration(
+                  color: ThemeColor.accentColor,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Icon(
+                  Icons.favorite_border_rounded,
+                  color: Colors.white,
+                  size: 13,
+                ),
+              ),
+            );
+          }),
         )
       ],
     );
