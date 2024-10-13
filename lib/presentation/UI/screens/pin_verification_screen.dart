@@ -73,7 +73,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                   },
                   keyboardType: TextInputType.number,
                   length: 6,
-                  obscureText: false,
+                  obscureText: true,
                   animationType: AnimationType.fade,
                   pinTheme: PinTheme(
                       shape: PinCodeFieldShape.box,
