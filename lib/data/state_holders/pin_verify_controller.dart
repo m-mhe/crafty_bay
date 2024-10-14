@@ -34,7 +34,7 @@ class PinVerifyController extends GetxController {
       success = true;
       _profileExist = await ProfileState.checkProfileState();
       Get.find<CartListController>().getCarts();
-      Get.find<WishListController>().getWishList();
+      Get.find<WishListController>().getUserWishes();
       _loading = false;
       _errorMessage = null;
     } else {

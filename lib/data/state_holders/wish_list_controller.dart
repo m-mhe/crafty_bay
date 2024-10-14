@@ -18,7 +18,7 @@ class WishListController extends GetxController {
 
   List<WishedProduct> get wishList => _wishList;
 
-  Future<bool> getWishList() async {
+  Future<bool> getUserWishes() async {
     _loading = true;
     bool success;
     update();

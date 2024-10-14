@@ -63,7 +63,7 @@ class _BottomNavigationWidgetsState extends State<BottomNavigationWidgets> {
                 label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.open_in_browser_rounded,
+                  Icons.border_clear_rounded,
                   size: 28,
                 ),
                 label: 'Categories'),
@@ -75,7 +75,7 @@ class _BottomNavigationWidgetsState extends State<BottomNavigationWidgets> {
                 label: 'Cart'),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.card_giftcard_outlined,
+                  Icons.favorite_border_rounded,
                   size: 28,
                 ),
                 label: 'Wish'),

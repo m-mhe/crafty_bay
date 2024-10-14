@@ -30,4 +30,5 @@ class ServerURLSs {
       'https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
   static String addToWishList({required String productId}) => '$_baseUrl/CreateWishList/$productId';
   static const String fetchWishList = '$_baseUrl/ProductWishList';
+  static String deleteFromWishList({required String productId}) => '$_baseUrl/RemoveWishList/$productId';
 }

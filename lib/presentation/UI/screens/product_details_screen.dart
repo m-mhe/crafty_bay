@@ -170,7 +170,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           qty: _itemBuyingAmount));
                       if (check) {
                         bottomPopUpMessage(
-                            context, 'Added to cart successfully!');
+                            context, 'Added to the cart successfully!');
                       } else {
                         bottomPopUpMessage(
                             context, 'Please login to your profile!');

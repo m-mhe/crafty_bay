@@ -7,6 +7,7 @@ import 'package:crafty_bay/data/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/data/state_holders/login_controller.dart';
 import 'package:crafty_bay/data/state_holders/product_list_by_remarks_controller.dart';
 import 'package:crafty_bay/data/state_holders/wish_list_controller.dart';
+import 'package:crafty_bay/data/state_holders/wish_list_item_delete_controller.dart';
 import 'package:crafty_bay/presentation/utils/navigation_controller.dart';
 import 'package:crafty_bay/presentation/utils/second_counter.dart';
 import 'package:get/get.dart';
@@ -35,5 +36,6 @@ class ControllerBinder extends Bindings {
     Get.lazyPut(()=>CartDeleteController(), fenix: true);
     Get.lazyPut(()=>WishlistAdditionController(), fenix: true);
     Get.lazyPut(()=>WishListController(), fenix: true);
+    Get.lazyPut(()=>WishListItemDeleteController(), fenix: true);
   }
 }
