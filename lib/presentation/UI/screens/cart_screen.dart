@@ -1,5 +1,6 @@
 import 'package:crafty_bay/data/state_holders/cart_delete_controller.dart';
 import 'package:crafty_bay/data/state_holders/cart_list_controller.dart';
+import 'package:crafty_bay/data/state_holders/create_cart_controller.dart';
 import 'package:crafty_bay/data/utils/server_urls.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
 import 'package:crafty_bay/presentation/UI/widgets/bottom_popup_message.dart';
@@ -12,6 +13,7 @@ import 'package:crafty_bay/presentation/utils/asset_paths.dart';
 import 'package:crafty_bay/presentation/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../data/model/add_to_cart.dart';
 import '../../../data/model/cart.dart';
 import '../../utils/navigation_controller.dart';
 
@@ -61,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
         body: GetBuilder<CartListController>(builder: (controller) {
           return Visibility(
-            visible: !controller.loading,
+            visible: !controller.loading&&!Get.find<CreateCartController>().loading,
             replacement: const LoadingIndicator(),
             child: Column(
               children: [
@@ -180,14 +182,78 @@ class _CartScreenState extends State<CartScreen> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10),
-                                            child: Text(
-                                              'Quantity: ${controller.carts[index].qty}',
-                                              style: const TextStyle(
-                                                  color: ThemeColor.accentColor,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
+                                            padding:
+                                                const EdgeInsets.only(right: 6),
+                                            child: ProductAmountPicker(
+                                                itemBuyingAmount: int.parse(
+                                                    controller
+                                                            .carts[index].qty ??
+                                                        '0'),
+                                                plusButtonOnPressed: () async {
+                                                  bool check = await Get.find<
+                                                          CreateCartController>()
+                                                      .createCart(
+                                                    AddToCart(
+                                                      productId: controller
+                                                          .carts[index]
+                                                          .productId,
+                                                      color: controller
+                                                          .carts[index].color,
+                                                      size: controller
+                                                          .carts[index].size,
+                                                      qty: int.parse(controller
+                                                                  .carts[index]
+                                                                  .qty ??
+                                                              '0') +
+                                                          1,
+                                                    ),
+                                                  );
+                                                  if (check) {
+                                                    await controller.getCarts();
+                                                  } else {
+                                                    bottomPopUpMessage(context,
+                                                        'Please login to your profile!');
+                                                    Get.to(() =>
+                                                        const EmailIdentificationScreen());
+                                                  }
+                                                },
+                                                minusButtonOnPressed: () async {
+                                                  if (int.parse(controller
+                                                              .carts[index]
+                                                              .qty ??
+                                                          '1') >
+                                                      1) {
+                                                    bool check = await Get.find<
+                                                            CreateCartController>()
+                                                        .createCart(
+                                                      AddToCart(
+                                                        productId: controller
+                                                            .carts[index]
+                                                            .productId,
+                                                        color: controller
+                                                            .carts[index].color,
+                                                        size: controller
+                                                            .carts[index].size,
+                                                        qty: int.parse(controller
+                                                                    .carts[
+                                                                        index]
+                                                                    .qty ??
+                                                                '0') -
+                                                            1,
+                                                      ),
+                                                    );
+                                                    if (check) {
+                                                      await controller
+                                                          .getCarts();
+                                                    } else {
+                                                      bottomPopUpMessage(
+                                                          context,
+                                                          'Please login to your profile!');
+                                                      Get.to(() =>
+                                                          const EmailIdentificationScreen());
+                                                    }
+                                                  }
+                                                }),
                                           ),
                                         ],
                                       )
