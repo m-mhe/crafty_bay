@@ -25,15 +25,15 @@ class ControllerBinder extends Bindings {
     Get.put(NetworkCaller());
     Get.put(HomeSliderController());
     Get.put(CategoryListController());
+    Get.put(CreateCartController());
+    Get.put(CartDeleteController());
     Get.put(ProductListByRemarksController());
     Get.lazyPut(()=>ProductListByCategoriesController(), fenix: true);
     Get.lazyPut(()=>ProductDetailsController(), fenix: true);
     Get.lazyPut(()=>LoginController(), fenix: true);
     Get.lazyPut(()=>PinVerifyController(), fenix: true);
     Get.lazyPut(()=>CreateProfileController(), fenix: true);
-    Get.lazyPut(()=>CreateCartController(), fenix: true);
     Get.lazyPut(()=>CartListController(), fenix: true);
-    Get.lazyPut(()=>CartDeleteController(), fenix: true);
     Get.lazyPut(()=>WishlistAdditionController(), fenix: true);
     Get.lazyPut(()=>WishListController(), fenix: true);
     Get.lazyPut(()=>WishListItemDeleteController(), fenix: true);
