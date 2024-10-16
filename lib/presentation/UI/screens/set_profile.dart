@@ -69,6 +69,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 20,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECFirstName,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -87,6 +88,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECLastName,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -105,6 +107,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECMobile,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -127,6 +130,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECFaxNumber,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -145,6 +149,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECCity,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -163,6 +168,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECPostCode,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -181,6 +187,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECState,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -199,6 +206,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECCountry,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -217,6 +225,7 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black87),
                   controller: _tECShippingAddress,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
