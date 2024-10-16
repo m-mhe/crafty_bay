@@ -254,7 +254,7 @@ class _SetProfileState extends State<SetProfile> {
                         onPressed: () async{
                           if (_theFormKey.currentState!.validate()) {
                             CreateProfileData profileData = CreateProfileData(
-                              cusName: '${_tECFirstName.text} ${_tECLastName.text}',
+                              cusName: '${_tECFirstName.text.trim()} ${_tECLastName.text.trim()}',
                               cusPhone: _tECMobile.text,
                               cusCity: _tECCity.text,
                               shipAdd: _tECShippingAddress.text,
@@ -274,7 +274,7 @@ class _SetProfileState extends State<SetProfile> {
                             if(created){
                               bottomPopUpMessage(context, 'Profile updated!');
                               await ProfileInfoCacheController.updateProfile(profileData: Profile(
-                                  cusName: '${_tECFirstName.text} ${_tECLastName.text}',
+                                  cusName: '${_tECFirstName.text.trim()} ${_tECLastName.text.trim()}',
                                   cusPhone: _tECMobile.text,
                                   cusCity: _tECCity.text,
                                   shipAdd: _tECShippingAddress.text,
