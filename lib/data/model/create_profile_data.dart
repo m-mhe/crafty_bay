@@ -1,4 +1,4 @@
-class ReadProfileData {
+class CreateProfileData {
   String? cusName;
   String? cusAdd;
   String? cusCity;
@@ -15,7 +15,7 @@ class ReadProfileData {
   String? shipCountry;
   String? shipPhone;
 
-  ReadProfileData(
+  CreateProfileData(
       {this.cusName,
         this.cusAdd,
         this.cusCity,
@@ -32,7 +32,7 @@ class ReadProfileData {
         this.shipCountry,
         this.shipPhone});
 
-  ReadProfileData.fromJson(Map<String, dynamic> json) {
+  CreateProfileData.fromJson(Map<String, dynamic> json) {
     cusName = json['cus_name'];
     cusAdd = json['cus_add'];
     cusCity = json['cus_city'];

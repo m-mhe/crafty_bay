@@ -16,7 +16,7 @@ class CreateProfileController extends GetxController{
 
   String get errorMessage => _errorMessage ?? '';
 
-  Future<bool> createProfile(ReadProfileData profileData) async {
+  Future<bool> createProfile(CreateProfileData profileData) async {
     bool success;
     _loading = true;
     update();

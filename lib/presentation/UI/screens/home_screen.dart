@@ -1,5 +1,7 @@
+import 'package:crafty_bay/data/model/create_profile_data.dart';
 import 'package:crafty_bay/data/state_holders/category_list_controller.dart';
 import 'package:crafty_bay/data/state_holders/product_list_by_remarks_controller.dart';
+import 'package:crafty_bay/data/state_holders/profile_info_cache_controller.dart';
 import 'package:crafty_bay/data/state_holders/token_controller.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
 import 'package:crafty_bay/presentation/UI/screens/popular_product_list_screen.dart';
@@ -45,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 String? accessToken = await TokenController.getToken();
                 if (accessToken != null) {
                   Get.to(
-                     const SetProfile(
+                      SetProfile(
                       heading: 'Update Profile',
-                       //todo:pass readProfileData
+                       readProfileData: await ProfileInfoCacheController.getProfile(),
                     ),
                   );
                 } else {

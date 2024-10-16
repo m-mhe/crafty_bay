@@ -1,4 +1,6 @@
 import 'package:crafty_bay/data/model/create_profile_data.dart';
+import 'package:crafty_bay/data/model/profile.dart';
+import 'package:crafty_bay/data/state_holders/profile_info_cache_controller.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
 import 'package:crafty_bay/presentation/UI/widgets/bottom_popup_message.dart';
 import 'package:crafty_bay/presentation/UI/widgets/button_loading_indicator.dart';
@@ -12,7 +14,7 @@ import '../widgets/app_logo.dart';
 class SetProfile extends StatefulWidget {
   const SetProfile({super.key, required this.heading, this.readProfileData});
   final String heading;
-  final ReadProfileData? readProfileData;
+  final Profile? readProfileData;
 
   @override
   State<SetProfile> createState() => _SetProfileState();
@@ -23,6 +25,14 @@ class _SetProfileState extends State<SetProfile> {
   void initState() {
     super.initState();
     _tECFirstName.text = widget.readProfileData?.cusName?.split(' ')[0]??'';
+    _tECLastName.text = widget.readProfileData?.cusName?.split(' ')[1]??'';
+    _tECMobile.text = widget.readProfileData?.cusPhone??'';
+    _tECFaxNumber.text = widget.readProfileData?.cusFax??'';
+    _tECCity.text = widget.readProfileData?.cusCity??'';
+    _tECPostCode.text = widget.readProfileData?.cusPostcode??'';
+    _tECState.text = widget.readProfileData?.cusState??'';
+    _tECCountry.text = widget.readProfileData?.cusCountry??'';
+    _tECShippingAddress.text = widget.readProfileData?.shipAdd??'';
   }
   @override
   Widget build(BuildContext context) {
@@ -234,7 +244,7 @@ class _SetProfileState extends State<SetProfile> {
                       child: ElevatedButton(
                         onPressed: () async{
                           if (_theFormKey.currentState!.validate()) {
-                            ReadProfileData profileData = ReadProfileData(
+                            CreateProfileData profileData = CreateProfileData(
                               cusName: '${_tECFirstName.text} ${_tECLastName.text}',
                               cusPhone: _tECMobile.text,
                               cusCity: _tECCity.text,
@@ -254,6 +264,23 @@ class _SetProfileState extends State<SetProfile> {
                             bool created =await controller.createProfile(profileData);
                             if(created){
                               bottomPopUpMessage(context, 'Profile updated!');
+                              await ProfileInfoCacheController.updateProfile(profileData: Profile(
+                                  cusName: '${_tECFirstName.text} ${_tECLastName.text}',
+                                  cusPhone: _tECMobile.text,
+                                  cusCity: _tECCity.text,
+                                  shipAdd: _tECShippingAddress.text,
+                                  shipCity: _tECCity.text,
+                                  shipCountry: _tECCountry.text,
+                                  shipName: '${_tECFirstName.text} ${_tECLastName.text}',
+                                  shipPhone: _tECMobile.text,
+                                  shipPostcode: _tECPostCode.text,
+                                  shipState: _tECState.text,
+                                  cusAdd: _tECShippingAddress.text,
+                                  cusCountry: _tECCountry.text,
+                                  cusFax: _tECFaxNumber.text,
+                                  cusPostcode: _tECPostCode.text,
+                                  cusState: _tECState.text
+                              ));
                               Get.back();
                             }else{
                               bottomPopUpMessage(context, controller.errorMessage, showError: true);

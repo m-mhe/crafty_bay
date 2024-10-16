@@ -1,4 +1,3 @@
-import 'package:crafty_bay/data/state_holders/profile_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenController{
