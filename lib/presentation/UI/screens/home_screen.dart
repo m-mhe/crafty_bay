@@ -45,8 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 String? accessToken = await TokenController.getToken();
                 if (accessToken != null) {
                   Get.to(
-                    const SetProfile(
+                     const SetProfile(
                       heading: 'Update Profile',
+                       //todo:pass readProfileData
                     ),
                   );
                 } else {

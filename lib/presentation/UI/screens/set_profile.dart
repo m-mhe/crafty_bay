@@ -10,8 +10,9 @@ import '../../../data/state_holders/create_profile_controller.dart';
 import '../widgets/app_logo.dart';
 
 class SetProfile extends StatefulWidget {
-  const SetProfile({super.key, required this.heading});
+  const SetProfile({super.key, required this.heading, this.readProfileData});
   final String heading;
+  final ReadProfileData? readProfileData;
 
   @override
   State<SetProfile> createState() => _SetProfileState();
@@ -19,20 +20,25 @@ class SetProfile extends StatefulWidget {
 
 class _SetProfileState extends State<SetProfile> {
   @override
+  void initState() {
+    super.initState();
+    _tECFirstName.text = widget.readProfileData?.cusName?.split(' ')[0]??'';
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-              top: MediaQuery.sizeOf(context).height / 10,
+              top: MediaQuery.sizeOf(context).height / 20,
               left: 26,
               right: 26,
-              bottom: 26),
+              bottom: MediaQuery.sizeOf(context).height / 20,),
           child: Form(
             key: _theFormKey,
             child: Column(
               children: [
-                const AppLogo(logoSize: 110),
+                const AppLogo(logoSize: 100),
                 const SizedBox(
                   height: 20,
                 ),
@@ -111,6 +117,24 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
+                  controller: _tECFaxNumber,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? i) {
+                    if (i != null) {
+                      if (i.trim().isEmpty) {
+                        return 'Kindly share your fax number!';
+                      }
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(hintText: 'Fax'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
                   controller: _tECCity,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
@@ -129,7 +153,61 @@ class _SetProfileState extends State<SetProfile> {
                   height: 15,
                 ),
                 TextFormField(
-                  controller: _tECShipping,
+                  controller: _tECPostCode,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? i) {
+                    if (i != null) {
+                      if (i.trim().isEmpty) {
+                        return 'Kindly share your post code!';
+                      }
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(hintText: 'Post Code'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: _tECState,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? i) {
+                    if (i != null) {
+                      if (i.trim().isEmpty) {
+                        return 'Kindly share your state name!';
+                      }
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(hintText: 'State'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: _tECCountry,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (String? i) {
+                    if (i != null) {
+                      if (i.trim().isEmpty) {
+                        return 'Kindly share the name of your country!';
+                      }
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(hintText: 'Country'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: _tECShippingAddress,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (String? i) {
                     if (i != null) {
@@ -160,18 +238,18 @@ class _SetProfileState extends State<SetProfile> {
                               cusName: '${_tECFirstName.text} ${_tECLastName.text}',
                               cusPhone: _tECMobile.text,
                               cusCity: _tECCity.text,
-                              shipAdd: _tECShipping.text,
-                              shipCity: 'dummy',
-                              shipCountry: 'dummy',
-                              shipName: 'dummy',
+                              shipAdd: _tECShippingAddress.text,
+                              shipCity: _tECCity.text,
+                              shipCountry: _tECCountry.text,
+                              shipName: '${_tECFirstName.text} ${_tECLastName.text}',
                               shipPhone: _tECMobile.text,
-                              shipPostcode: 'dummy',
-                              shipState: _tECCity.text,
-                              cusAdd: _tECShipping.text,
-                              cusCountry: _tECShipping.text,
-                              cusFax: 'dummy',
-                              cusPostcode: 'dummy',
-                              cusState: _tECShipping.text
+                              shipPostcode: _tECPostCode.text,
+                              shipState: _tECState.text,
+                              cusAdd: _tECShippingAddress.text,
+                              cusCountry: _tECCountry.text,
+                              cusFax: _tECFaxNumber.text,
+                              cusPostcode: _tECPostCode.text,
+                              cusState: _tECState.text
                             );
                             bool created =await controller.createProfile(profileData);
                             if(created){
@@ -208,5 +286,9 @@ class _SetProfileState extends State<SetProfile> {
   final TextEditingController _tECLastName = TextEditingController();
   final TextEditingController _tECMobile = TextEditingController();
   final TextEditingController _tECCity = TextEditingController();
-  final TextEditingController _tECShipping = TextEditingController();
+  final TextEditingController _tECState = TextEditingController();
+  final TextEditingController _tECCountry = TextEditingController();
+  final TextEditingController _tECPostCode = TextEditingController();
+  final TextEditingController _tECFaxNumber = TextEditingController();
+  final TextEditingController _tECShippingAddress = TextEditingController();
 }

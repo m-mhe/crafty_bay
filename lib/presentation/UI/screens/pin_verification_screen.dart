@@ -167,7 +167,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
 
   //---------------------------------------Functions---------------------------------------
   void _navigateToSetProfileScreen() {
-    Get.off(() => const SetProfile(heading: 'Complete profile',));
+    Get.off(() =>  const SetProfile(heading: 'Complete profile',readProfileData: null,));
   }
 
   TextStyle? _dynamicTextStyleCounter() {
