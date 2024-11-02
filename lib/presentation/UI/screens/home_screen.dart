@@ -1,11 +1,9 @@
-import 'package:crafty_bay/data/model/create_profile_data.dart';
 import 'package:crafty_bay/data/state_holders/category_list_controller.dart';
 import 'package:crafty_bay/data/state_holders/product_list_by_remarks_controller.dart';
 import 'package:crafty_bay/data/state_holders/profile_info_cache_controller.dart';
 import 'package:crafty_bay/data/state_holders/token_controller.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
 import 'package:crafty_bay/presentation/UI/screens/popular_product_list_screen.dart';
-import 'package:crafty_bay/presentation/UI/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/UI/screens/set_profile.dart';
 import 'package:crafty_bay/presentation/UI/screens/special_product_list_screen.dart';
 import 'package:crafty_bay/presentation/UI/widgets/bottom_popup_message.dart';
@@ -20,7 +18,6 @@ import '../widgets/product_card.dart';
 import '../widgets/product_slider_view.dart';
 import '../widgets/section_title.dart';
 import 'package:get/get.dart';
-
 import 'new_product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {

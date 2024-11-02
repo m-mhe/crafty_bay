@@ -3,6 +3,7 @@ import 'package:crafty_bay/data/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/data/state_holders/create_cart_controller.dart';
 import 'package:crafty_bay/data/utils/server_urls.dart';
 import 'package:crafty_bay/presentation/UI/screens/email_identification_screen.dart';
+import 'package:crafty_bay/presentation/UI/screens/payment_method_selection_screen.dart';
 import 'package:crafty_bay/presentation/UI/widgets/bottom_popup_message.dart';
 import 'package:crafty_bay/presentation/UI/widgets/button_loading_indicator.dart';
 import 'package:crafty_bay/presentation/UI/widgets/icon_back_button.dart';
@@ -63,7 +64,8 @@ class _CartScreenState extends State<CartScreen> {
         ),
         body: GetBuilder<CartListController>(builder: (controller) {
           return Visibility(
-            visible: !controller.loading&&!Get.find<CreateCartController>().loading,
+            visible: !controller.loading &&
+                !Get.find<CreateCartController>().loading,
             replacement: const LoadingIndicator(),
             child: Column(
               children: [
@@ -274,7 +276,9 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 TotalPriceAndProceed(
                     totalPrice: (controller.totalPrice),
-                    buttonOnTap: () {},
+                    buttonOnTap: () {
+                      Get.to(() => const PaymentMethodSelectionScreen());
+                    },
                     buttonLabel: 'Checkout')
               ],
             ),

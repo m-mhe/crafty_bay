@@ -5,6 +5,7 @@ import 'package:crafty_bay/data/state_holders/category_list_controller.dart';
 import 'package:crafty_bay/data/state_holders/create_cart_controller.dart';
 import 'package:crafty_bay/data/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/data/state_holders/login_controller.dart';
+import 'package:crafty_bay/data/state_holders/payment_methods_controller.dart';
 import 'package:crafty_bay/data/state_holders/product_list_by_remarks_controller.dart';
 import 'package:crafty_bay/data/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/data/state_holders/wish_list_item_delete_controller.dart';
@@ -28,14 +29,15 @@ class ControllerBinder extends Bindings {
     Get.put(CreateCartController());
     Get.put(CartDeleteController());
     Get.put(ProductListByRemarksController());
-    Get.lazyPut(()=>ProductListByCategoriesController(), fenix: true);
-    Get.lazyPut(()=>ProductDetailsController(), fenix: true);
-    Get.lazyPut(()=>LoginController(), fenix: true);
-    Get.lazyPut(()=>PinVerifyController(), fenix: true);
-    Get.lazyPut(()=>CreateProfileController(), fenix: true);
-    Get.lazyPut(()=>CartListController(), fenix: true);
-    Get.lazyPut(()=>WishlistAdditionController(), fenix: true);
-    Get.lazyPut(()=>WishListController(), fenix: true);
-    Get.lazyPut(()=>WishListItemDeleteController(), fenix: true);
+    Get.lazyPut(() => ProductListByCategoriesController(), fenix: true);
+    Get.lazyPut(() => ProductDetailsController(), fenix: true);
+    Get.lazyPut(() => LoginController(), fenix: true);
+    Get.lazyPut(() => PinVerifyController(), fenix: true);
+    Get.lazyPut(() => CreateProfileController(), fenix: true);
+    Get.lazyPut(() => CartListController(), fenix: true);
+    Get.lazyPut(() => WishlistAdditionController(), fenix: true);
+    Get.lazyPut(() => WishListController(), fenix: true);
+    Get.lazyPut(() => WishListItemDeleteController(), fenix: true);
+    Get.lazyPut(() => PaymentMethodsController(), fenix: true);
   }
 }
